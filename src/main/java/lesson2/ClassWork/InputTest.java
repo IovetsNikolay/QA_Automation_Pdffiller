@@ -1,4 +1,4 @@
-package lesson2;
+package lesson2.ClassWork;
 
 import java.io.IOException;
 import java.io.InputStream;

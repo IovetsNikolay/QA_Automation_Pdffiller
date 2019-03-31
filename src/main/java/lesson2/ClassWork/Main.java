@@ -1,4 +1,4 @@
-package lesson2;
+package lesson2.ClassWork;
 
 public class Main {
     public static int a = 3;

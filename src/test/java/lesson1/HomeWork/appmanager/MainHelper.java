@@ -20,7 +20,7 @@ public class MainHelper {
         return driver.findElement(locator).getText();
     }
 
-    protected void printMessageValue(String stringToPrint) {                        //Print some String value in the console method
+    public void printMessageValue(String stringToPrint) {                        //Print some String value in the console method
         System.out.println("Message Text is:");
         System.out.println("***");
         System.out.println(stringToPrint);
