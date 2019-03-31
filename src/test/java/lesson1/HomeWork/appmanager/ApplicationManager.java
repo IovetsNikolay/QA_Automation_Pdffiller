@@ -1,4 +1,4 @@
-package lesson1.HomeWork.pages;
+package lesson1.HomeWork.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

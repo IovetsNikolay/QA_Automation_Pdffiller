@@ -1,4 +1,4 @@
-package lesson1.HomeWork.pages;
+package lesson1.HomeWork.appmanager;
 
 import lesson1.HomeWork.model.UserDataFields;
 import org.openqa.selenium.By;
