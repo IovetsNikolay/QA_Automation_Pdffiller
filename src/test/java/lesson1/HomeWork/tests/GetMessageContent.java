@@ -10,11 +10,11 @@ public class GetMessageContent extends FacebookTests {
     public void testFacebookMessage () {
 
         DataFields testUser = new DataFields("6572071413", "s1gngr0w");
-        app.pageLogin(testUser);
-        app.pressMessageButton();
-        app.getMessageValue();
-        app.printMessageValue();
-        app.testMessageValue();
+        app.getLoginPage().pageLogin(testUser);
+        app.getMainPage().pressMessageButton();
+        app.getMessagePage().getMessageValue();
+        app.getMessagePage().printMessageValue();
+        app.getMessagePage().testMessageValue();
 
     }
 

@@ -20,7 +20,4 @@ public class FacebookTests {
         app.stop();
     }
 
-    public ApplicationManager getApp() {
-        return app;
-    }
 }
