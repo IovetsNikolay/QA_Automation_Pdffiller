@@ -2,7 +2,6 @@ package lesson1.HomeWork.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 public class MessagePageHelper {
     private WebDriver driver;                                                   //Driver variable
@@ -14,26 +13,26 @@ public class MessagePageHelper {
     }
 
     protected void selectMessenger () {
-        driver.findElement(messengerSelect).click();
+        clickOnElement(messengerSelect);
+    }
+
+    private void clickOnElement(By locator) {
+        driver.findElement(locator).click();
     }
 
     public String getMessageValue () {
         selectMessenger ();
-        return driver.findElement(MassageContent).getText();
+        return getTagText(MassageContent);
     }
 
-    public void printMessageValue() {
+    private String getTagText(By locator) {
+        return driver.findElement(locator).getText();
+    }
+
+    public void printMessageValue(String stringToPrint) {
         System.out.println("Message Text is:");
         System.out.println("***");
-        System.out.println(getMessageValue ());
+        System.out.println(stringToPrint);
     }
 
-    public void testMessageValue() {
-        String expectedResult = "Get Started";
-        testMessageText(expectedResult);
-    }
-
-    private void testMessageText(String expectedResult) {
-        Assert.assertEquals(getMessageValue (), expectedResult);
-    }
 }

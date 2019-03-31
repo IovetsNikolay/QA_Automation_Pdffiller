@@ -1,10 +1,12 @@
 package lesson1.HomeWork.model;
 
-public class DataFields {
+public class UserDataFields {
     private final String login;
     private final String password;
 
-    public DataFields(String login, String password) {
+
+
+    public UserDataFields(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -16,4 +18,5 @@ public class DataFields {
     public String getPassword() {
         return password;
     }
+
 }

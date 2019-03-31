@@ -1,54 +1,43 @@
 package lesson1.HomeWork.pages;
 
-import lesson1.HomeWork.model.DataFields;
+import lesson1.HomeWork.model.UserDataFields;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Scanner;
 
-public class LoginPageHelper {                      //Fields and methods executed in Facebook login page
+public class LoginPageHelper {                                                      //Fields and methods executed in Facebook login page
     private WebDriver driver;
+
     private By loginName = By.xpath("//input[@id='email']");
     private By passwordName = By.xpath("//input[@id='pass']");
     private By loginButton = By.xpath("//input[@id='u_0_2']");
 
-    public LoginPageHelper(WebDriver driver) {        //Constructor which get driver object
+    public LoginPageHelper(WebDriver driver) {                                      //Constructor which get driver object
         this.driver = driver;
     }
 
-    public void pageLogin(DataFields credentials) {             //general login method
-        ClearLoginField ();
-        ClearPasswordField ();
-        SetAccountNameIntoLoginField (credentials.getLogin());
-        SetPasswordIntoPasswordField (credentials.getPassword());
-        pressLoginButton ();
+    public void pageLogin(UserDataFields credentials) {                                 //general login method
+        typeStringValueIntoField(credentials.getLogin(), loginName);                //clear and fill login input with login
+        typeStringValueIntoField(credentials.getPassword(), passwordName);          //clear and fill password input with password
+        clickOnElement(loginButton);                                                //click on the element
+    }
+
+    private void clickOnElement(By locator) {
+        driver.findElement(locator).click();
+    }
+
+    private void typeStringValueIntoField(String credentials, By locator) {
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(credentials);
     }
 
     //Need to Use, but How?
-    protected String consoleInput (String description) {            //procedure that read String variable from user input
+    protected String consoleInput (String description) {                            //procedure that read String variable from user input
         System.out.println("Please enter" + description + "value:" );
         Scanner in = new Scanner(System.in);
         //System.out.println();
         return in.next();
     }
 
-    private void ClearLoginField () {
-        driver.findElement(loginName).clear();
-    }
-
-    private void ClearPasswordField () {
-        driver.findElement(passwordName).clear();
-    }
-
-    private void SetAccountNameIntoLoginField (String accountName) {
-        driver.findElement(loginName).sendKeys(accountName);
-    }
-
-    private void SetPasswordIntoPasswordField (String passwordValue) {
-        driver.findElement(passwordName).sendKeys(passwordValue);
-    }
-
-    private void pressLoginButton () {
-        driver.findElement(loginButton).click();
-    }
 }
