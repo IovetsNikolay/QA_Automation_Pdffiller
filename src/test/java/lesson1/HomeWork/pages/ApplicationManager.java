@@ -1,26 +1,26 @@
 package lesson1.HomeWork.pages;
 
+import lesson1.HomeWork.model.DataFields;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-public class FacebookTests {
-
+public class ApplicationManager {
     protected WebDriver driver;
-
+    protected String url = "https://www.facebook.com";
     private By loginName = By.xpath("//input[@id='email']");
     private By passwordName = By.xpath("//input[@id='pass']");
     private By loginButton = By.xpath("//input[@id='u_0_2']");
     private By messageButton = By.xpath("//div[contains(text(),'Messenger')]");
     private By messangerSelect = By.xpath("//ul[@aria-label='Conversation List']/*[1]");
     private By MassageContent = By.xpath("//div[@class='__i_']//div[@id='js_1']/*[last()]/*[1]/*[last()]/div/div/div/span");
-    protected String url = "https://www.facebook.com";
 
-
-
-    protected void pageLogin(DataFields credentials) {
+    public void pageLogin(DataFields credentials) {
         ClearLoginField ();
         ClearPasswordField ();
         SetAccountNameIntoLoginField (credentials.getLogin());
@@ -56,7 +56,7 @@ public class FacebookTests {
         driver.findElement(loginButton).click();
     }
 
-    protected void pressMessageButton () {
+    public void pressMessageButton () {
         driver.findElement(messageButton).click();
     }
 
@@ -64,18 +64,18 @@ public class FacebookTests {
         driver.findElement(messangerSelect).click();
     }
 
-    protected String getMessageValue () {
+    public String getMessageValue () {
         selectMessenger ();
         return driver.findElement(MassageContent).getText();
     }
 
-    protected void printMessageValue() {
+    public void printMessageValue() {
         System.out.println("Message Text is:");
         System.out.println("***");
         System.out.println(getMessageValue ());
     }
 
-    protected void testMessageValue() {
+    public void testMessageValue() {
         String expectedResult = "Get Started";
         testMessageText(expectedResult);
     }
@@ -84,4 +84,17 @@ public class FacebookTests {
         Assert.assertEquals(getMessageValue (), expectedResult);
     }
 
+    public void init() {
+        System.setProperty("webdriver.chrome.driver", "C:/webDrivers/chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        driver.navigate().to(url);
+    }
+
+    public void stop() {
+        driver.quit();
+    }
 }

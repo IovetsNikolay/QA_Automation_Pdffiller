@@ -1,46 +1,21 @@
 package lesson1.HomeWork.tests;
 
-import lesson1.HomeWork.pages.DataFields;
-import lesson1.HomeWork.pages.FacebookTests;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
+import lesson1.HomeWork.model.DataFields;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
 public class GetMessageContent extends FacebookTests {
-
-    @BeforeSuite
-
-    public void setup () {
-        System.setProperty("webdriver.chrome.driver", "C:/webDrivers/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-        driver.navigate().to(url);
-
-    }
 
     @Test
 
     public void testFacebookMessage () {
 
         DataFields testUser = new DataFields("6572071413", "s1gngr0w");
-        pageLogin(testUser);
-        pressMessageButton ();
-        getMessageValue ();
-        printMessageValue ();
-        testMessageValue();
+        app.pageLogin(testUser);
+        app.pressMessageButton();
+        app.getMessageValue();
+        app.printMessageValue();
+        app.testMessageValue();
 
-    }
-    @AfterTest
-
-    public void afterMethod () {
-        driver.quit();
     }
 
 }

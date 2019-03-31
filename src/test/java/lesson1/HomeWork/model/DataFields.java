@@ -1,4 +1,4 @@
-package lesson1.HomeWork.pages;
+package lesson1.HomeWork.model;
 
 public class DataFields {
     private final String login;
