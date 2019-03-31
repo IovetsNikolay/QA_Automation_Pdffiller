@@ -1,5 +1,6 @@
 package lesson1.HomeWork.tests;
 
+import lesson1.HomeWork.pages.DataFields;
 import lesson1.HomeWork.pages.FacebookTests;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -28,7 +29,8 @@ public class GetMessageContent extends FacebookTests {
 
     public void testFacebookMessage () {
 
-        pageLogin("6572071413", "s1gngr0w");
+        DataFields testUser = new DataFields("6572071413", "s1gngr0w");
+        pageLogin(testUser);
         pressMessageButton ();
         getMessageValue ();
         printMessageValue ();

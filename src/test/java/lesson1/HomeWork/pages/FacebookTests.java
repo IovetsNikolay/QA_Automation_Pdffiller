@@ -20,11 +20,11 @@ public class FacebookTests {
 
 
 
-    protected void pageLogin(String login, String password) {
+    protected void pageLogin(DataFields credentials) {
         ClearLoginField ();
         ClearPasswordField ();
-        SetAccountNameIntoLoginField (login);
-        SetPasswordIntoPasswordField (password);
+        SetAccountNameIntoLoginField (credentials.getLogin());
+        SetPasswordIntoPasswordField (credentials.getPassword());
         pressLoginButton ();
     }
 
