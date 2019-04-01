@@ -1,15 +1,18 @@
 package lesson2.HomeWork;
 
-public class DataTypesConversionWithUserInput {
+import lesson2.HomeWork.Helpers.ApplicationManager;
+
+public class DataTypesConversionWithUserInput extends ApplicationManager {
 
     public static void main(String[] args) {
-        DataTypeHelper obj1 = new DataTypeHelper();
 
-        obj1.charToIntWithUserInput();
+        DataTypesConversionWithUserInput obj1 = new DataTypesConversionWithUserInput ();
+
+        obj1.dataTypesConversionWithUserInputHelper.charToIntWithUserInput();
         System.out.println();
         System.out.println("***");
         System.out.println();
-        obj1.intToCharWithUserInput();
+        obj1.dataTypesConversionWithUserInputHelper.intToCharWithUserInput();
 
     }
 }

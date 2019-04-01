@@ -1,24 +1,24 @@
-package lesson2.HomeWork;
+package lesson2.HomeWork.Helpers;
 
-public class TypeTester {
+public class TypeTesterHelper {
 
-    void printType(byte x) {
+    public void printType(byte x) {
         System.out.print("byte value: " + x + " ");
     }
 
-    void printType(int x) {
+    public void printType(int x) {
         System.out.print("int value: " + x + " ");
     }
 
-    void printType(float x) {
+    public void printType(float x) {
         System.out.print("float value: " + x + " ");
     }
 
-    void printType(double x) {
+    public void printType(double x) {
         System.out.print("double value: " + x + " ");
     }
 
-    void printType(char x) {
+    public void printType(char x) {
         System.out.print("char value: " + x + " ");
     }
 }
