@@ -7,11 +7,12 @@ public class DataTypesConversionWithUserInputHelper {
 
     private DataTypesConversionHelper dataTypesConversionHelper;
     private TypeTesterHelper typeTester;
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan;
 
-    DataTypesConversionWithUserInputHelper (TypeTesterHelper typeTester, DataTypesConversionHelper dataTypesConversionHelper) {
+    DataTypesConversionWithUserInputHelper (TypeTesterHelper typeTester, DataTypesConversionHelper dataTypesConversionHelper, Scanner scan) {
         this.typeTester = typeTester;
         this.dataTypesConversionHelper = dataTypesConversionHelper;
+        this.scan = scan;
     }
 
     public void charToIntWithUserInput() {
