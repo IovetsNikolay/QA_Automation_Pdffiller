@@ -10,10 +10,9 @@ public class OperationsWithNumbersHelper {
         this.scanner = scanner;
     }
 
-    public int getIntFromUserInput(boolean caseState) {                     //caseState = true - two-digit positive number
-        int twoDigNum;                                                      //caseState = true - three-digit positive number
+    public int userInputInt(boolean caseState) {                            //caseState = true - two-digit positive number
+        int twoDigNum;                                                      //caseState = false - three-digit positive number
         int threeDigNum;
-        double fracPartNum;
         int counter = 0;
         if (caseState) {
             do {
@@ -44,7 +43,7 @@ public class OperationsWithNumbersHelper {
         }
     }
 
-    public double getDoubleFromUserInput() {                //double number with not-null with fractional part
+    public double userInputDouble() {                //double number with not-null with fractional part
         double fracPartNum;
         int counter = 0;
 
@@ -60,6 +59,24 @@ public class OperationsWithNumbersHelper {
         }
         while (((fracPartNum - (int) fracPartNum) == 0.0));
         return fracPartNum;
+    }
+
+    public int getSummOfTwoDigInt (int num) {
+        int numSumm;
+        numSumm = (num / 10 + num % 10);
+        return numSumm;
+    }
+
+    public int getSummOfThreeDigInt (int num) {
+        int numSumm;
+        int temp = num % 100;
+        int temp1 = temp % 10;
+        numSumm = (temp1 + (temp - temp1)/10 + ((num - temp) / 100));
+        return numSumm;
+    }
+    public double getRoundDouble(double num) {
+        double roundValue = Math.round(num);
+        return roundValue;
     }
 }
 
