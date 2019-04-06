@@ -19,7 +19,7 @@ public class freeSeatsInCinema {
     public String url = "http://liniakino.com/showtimes/aladdin/";
 
     public By filmLinkDambo = By.xpath("//li[@class='showtime-movie']//a[contains(text(),'Дамбо')]/../..//div[@class='day-block showtime-day'][1]//li[1]//a");
-    public By closeButton = By.xpath("//div[@class= 'window-close arcticmodal-close']");
+    public By closeButton = By.xpath("//div[@class='window-close arcticmodal-close']");
     public By allSeats = By.xpath("//div[@id= 'hall-scheme-container']/div/div");
     public By seatsOccupied = By.xpath("//div[@id= 'hall-scheme-container']/div/div[@class = 'seat seat-occupied']");
     public By seatsReserved = By.xpath("//div[@id= 'hall-scheme-container']/div/div[@class = 'seat seat-reserved']");
@@ -49,12 +49,12 @@ public class freeSeatsInCinema {
         List <WebElement> allSeatsList = driver.findElements(allSeats);
         List <WebElement> occupiedSeatsList = driver.findElements(seatsOccupied);
         List <WebElement> reservedSeatsList = driver.findElements(seatsReserved);
-        List <WebElement> freeSeatsList = driver.findElements(seatsReserved);
+        List <WebElement> freeSeatsList = driver.findElements(seatsFree);
         System.out.println("Кол-во мест в зале: " + allSeatsList.size());
         System.out.println("Кол-во мест занятых: " + (occupiedSeatsList.size()+reservedSeatsList.size()));
         System.out.println("Кол-во мест свободных: " + freeSeatsList.size());
-        System.out.println("% Занятых мест от “всего мест в зале”: " + (occupiedSeatsList.size()+reservedSeatsList.size())/allSeatsList.size());
-        System.out.println("% Занятых мест от “всего мест в зале”: " + (freeSeatsList.size()/allSeatsList.size()));
+        System.out.println("% Занятых мест от “всего мест в зале”: " + (((occupiedSeatsList.size()+reservedSeatsList.size())/allSeatsList.size())*100));
+        System.out.println("% Занятых мест от “всего мест в зале”: " + (freeSeatsList.size()/allSeatsList.size())*100);
 
     }
 
