@@ -21,7 +21,7 @@ public class FaceBookRegistration extends AppManager {
         fillRegistrationInputs();
         chooseDropDowns();
         clickCheckboxes();
-        clickSubmitButton(submitButton);
+        clickButton(submitButton);
 
     }
 

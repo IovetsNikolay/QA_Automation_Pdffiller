@@ -19,7 +19,7 @@ public class AppManager {
     private By birthdayYearDropdown = By.xpath("//select[@id='year']");
     private By sexManInput = By.xpath("//input[@name='sex'][@value='1']");
     private By sexWomanInput = By.xpath("//input[@name='sex'][@value='2']");
-    private By submitButton = By.xpath("//button[@name='websubmit']");
+    public By submitButton = By.xpath("//button[@name='websubmit']");
 
 
     WebDriver driver;
@@ -41,13 +41,13 @@ public class AppManager {
     }
 
 
-    protected void clickSubmitButton(By submitButton) {
-        driver.findElement(submitButton).click();
+    protected void clickButton(By locator) {
+        driver.findElement(locator).click();
     }
 
     protected void clickCheckboxes() {
-        clickSubmitButton(sexManInput);
-        clickSubmitButton(sexWomanInput);
+        clickButton(sexManInput);
+        clickButton(sexWomanInput);
     }
 
     protected void chooseDropDowns() {
