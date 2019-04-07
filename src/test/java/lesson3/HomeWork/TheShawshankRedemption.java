@@ -2,12 +2,14 @@ package lesson3.HomeWork;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TheShawshankRedemption {
@@ -27,6 +29,7 @@ public class TheShawshankRedemption {
     private By filmActors = By.xpath("//table[@class='cast_list']//tr/td[2]/a");
     private By filmMetascore = By.xpath("//div[@class='metacriticScore score_favorable titleReviewBarSubItem']/span");
     private By filmUserReview = By.xpath("//div[@class='titleReviewBarItem titleReviewbarItemBorder']//span[@class='subText']/a[1]");
+    private By filmCriticsReview = By.xpath("//div[@class='titleReviewBarItem titleReviewbarItemBorder']//span[@class='subText']/a[2]");
     private By filmSamePictures = By.xpath("//div[@class='rec_page rec_selected']//img");
 
     @BeforeTest
@@ -56,10 +59,29 @@ public class TheShawshankRedemption {
         System.out.println("Film Lenght in seconds: " + (i*60));
         System.out.println("Film Rating: " + driver.findElement(filmRating).getText());
         System.out.println("Film Ganre: " + driver.findElement(filmGenre).getText());
-        System.out.println("Film TrailerLink: " + driver.findElement(filmTrailerSrc).getAttribute("href"));
-
-
-
+        System.out.println("Film Trailer Link: " + driver.findElement(filmTrailerSrc).getAttribute("href"));
+        System.out.println("Film Poster Link: " + driver.findElement(filmPosterSrc).getAttribute("src"));
+        System.out.println("Film Director: " + driver.findElement(filmDirector).getText());
+        System.out.println("Film Director: " + driver.findElement(filmDirector).getText());
+        List <WebElement> actorList = driver.findElements(filmActors);
+        for (int j = 0; j < 5; j++) {
+            System.out.println((j +1) + " actor is: " + actorList.get(j).getText());
+        }
+        System.out.println("Film Metascore Rating: " + driver.findElement(filmMetascore).getText());
+        System.out.println("Film Metascore Rating: " + driver.findElement(filmMetascore).getText());
+        String userReviewStr = driver.findElement(filmUserReview).getText();
+        userReviewStr = userReviewStr.replaceAll("\\D+","");
+        int userReviewInt = Integer.parseInt(userReviewStr);
+        String criticsReviewStr = driver.findElement(filmCriticsReview).getText();
+        criticsReviewStr = criticsReviewStr.replaceAll("\\D+","");
+        int criticsReviewInt = Integer.parseInt(criticsReviewStr);
+        System.out.println("Number of user ratings: " + userReviewInt);
+        System.out.println("Number of critics ratings: " + criticsReviewInt);
+        System.out.println("Total ratings: " + (criticsReviewInt + userReviewInt));
+        List <WebElement> sameFilmsList = driver.findElements(filmSamePictures);
+        for (int j = 0; j < 3; j++) {
+            System.out.println((j+1) + " same film is: " + sameFilmsList.get(j).getAttribute("title"));
+        }
     }
 
     @AfterTest
