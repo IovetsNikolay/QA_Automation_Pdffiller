@@ -1,4 +1,4 @@
-package lesson3.HomeWork;
+package lesson3.HomeWork.FilmInfo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

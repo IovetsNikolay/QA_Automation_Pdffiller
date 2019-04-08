@@ -1,4 +1,4 @@
-package lesson4;
+package lesson4.Akinator;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
