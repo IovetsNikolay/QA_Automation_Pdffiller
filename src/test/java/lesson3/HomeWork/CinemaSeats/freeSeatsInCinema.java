@@ -4,12 +4,15 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class freeSeatsInCinema {
@@ -48,7 +51,7 @@ public class freeSeatsInCinema {
         options.addArguments("--disable-notifications");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         //loginPage = new LoginPageHelper(driver);                           //Transfer created driver object in LoginPageHelper class by constructor
         //wait = new WebDriverWait(driver, 10);
         driver.navigate().to(url);
@@ -58,8 +61,8 @@ public class freeSeatsInCinema {
 
     private void mainMethod() throws InterruptedException {
         driver.findElement(filmLinkDambo).click();
-        WebElement iframeElem = driver.findElement(By.cssSelector("iframe"));
-        driver.switchTo().frame(iframeElem);
+        WebElement iframeElem = driver.findElement(By.tagName("iframe"));
+        driver.switchTo().frame(0);
 
         //if (isElementPresent(closeButton) == true) {
         //Thread.sleep(1500);
@@ -70,6 +73,14 @@ public class freeSeatsInCinema {
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class)
                 .until(ExpectedConditions.elementToBeClickable(closeButton));
         driver.findElement(closeButton).click();*/
+        new FluentWait<>(driver)
+                .pollingEvery(Duration.ofMillis(100))
+                .withTimeout(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class, WebDriverException.class)
+                .until(d -> {
+                    driver.findElement(closeButton).click();
+                    return true;
+                });
 
         List<WebElement> allSeatsList = driver.findElements(allSeats);
         List<WebElement> occupiedSeatsList = driver.findElements(seatsOccupied);
