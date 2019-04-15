@@ -38,25 +38,36 @@ public class Akinator {
         System.out.println("Akinator Game, lets start");
         System.out.println();
         driver.findElement(akinatorObj.playButton).click();
+        String previuosQuestionText;
         for (int i = 1; true; i++) {
             System.out.println(i + ". " + driver.findElement(akinatorObj.questionText).getText());
+            /*previuosQuestionText = driver.findElement(akinatorObj.questionText).getText();
+            if (i != 1) {
+                new FluentWait<>(driver)
+                        .pollingEvery(Duration.ofMillis(100))
+                        .withTimeout(Duration.ofSeconds(5))
+                        .until(d ->
+                               driver.findElement(akinatorObj.questionText).getText() != previuosQuestionText
+                        )*/
+
             System.out.println();
             new FluentWait<>(driver)
                     .pollingEvery(Duration.ofMillis(100))
                     .withTimeout(Duration.ofSeconds(5))
-                    .ignoring(NoSuchElementException.class, WebDriverException.class)
+                    .ignoring(NoSuchElementException.class)
+                    .ignoring(WebDriverException.class)                         //!!!!!!!!
                     .until(d ->
                             driver.findElements(By.xpath("//div[@class='database-selection selector dialog-box']//ul/li")).size() == 5
                     );
-
             IntStream.rangeClosed(1, 5).forEach(answerNumber ->
+
                     new FluentWait<>(driver)
                             .pollingEvery(Duration.ofMillis(200))
                             .withTimeout(Duration.ofSeconds(2))
                             .ignoring(NoSuchElementException.class, WebDriverException.class)
                             .until(d -> {
                                 WebElement answer = driver.findElement(By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)[" + answerNumber + "]"));
-                                System.out.println("Answer #1:" + answer.getText());
+                                System.out.println("Answer #" + answerNumber + " :" + answer.getText());            //Здесь избыточная проверка??
                                 return true;
                             })
             );

@@ -6,6 +6,20 @@ public class PlayerTurn {
 
     Scanner scan = new Scanner(System.in);
 
+    public byte GameTypeInput (){
+        System.out.println("Please choose type of the game:");
+        System.out.println("1: Computer vs Computer");
+        System.out.println("2: Player VS Computer");
+        System.out.println("3: Player VS Player");
+        byte userInput;
+        do {
+            System.out.println("Choose number: ");
+            userInput = scan.nextByte();
+        }
+        while (userInput <= 0 || userInput > 3);
+        return userInput;
+    }
+
     public byte playerInput() {
         byte playersTurn;
         do {
