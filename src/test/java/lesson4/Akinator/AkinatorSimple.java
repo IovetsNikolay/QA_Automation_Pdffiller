@@ -9,8 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.List;
 import java.util.Scanner;
@@ -44,33 +42,11 @@ public class AkinatorSimple {
         driver.findElement(playButton).click();
         for (int i = 1; true; i++) {
             String iStr = String.valueOf(i);
-            new FluentWait<>(driver)                                            //Check question number
-                    .pollingEvery(Duration.ofMillis(100))
-                    .withTimeout(Duration.ofSeconds(5))
-                    .until(ExpectedConditions.textToBePresentInElementLocated(questionNumberText, iStr));
-            //wait.until(ExpectedConditions.textToBePresentInElementLocated(akinatorObj.questionNumberText, iStr));
-
-
-            //.until(driver.findElement(By.xpath(driver.findElement(akinatorObj.questionText).getText())
-            //                .equals(previuosQuestionText));
-
-            //.until(driver.findElement(By.xpath(driver.findElement(akinatorObj.questionText).getText())))
-
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(questionNumberText, iStr));
             //new FluentWait<>(driver)
             // .pollingEvery(Duration.ofMillis(100))
             //.withTimeout(Duration.ofSeconds(5))
-            //.until(
-            //String previuosQuestionText1 = previuosQuestionText;
-            //String questionText = driver.findElement(akinatorObj.questionText).getText();
-            //if (isQuestioStringEquals) {
-            //  System.out.println("returnString");
-            //} else {
-
-            //}
-            //)
-
-            //      d -> {
-
+            //.until(d -> {
             //if (questionText.equals(previuosQuestionText1)) {
             //  return(questionText);
             //}
@@ -80,8 +56,7 @@ public class AkinatorSimple {
             System.out.println(questionNumberValue + ". " + questionValue);
 
             System.out.println();
-            //List<WebElement> titles;
-                    wait.until(d -> {
+            wait.until(d -> {
                 List<WebElement> answers = driver.findElements(answersText);
                 if (answers.size() == 5) {
                     int k = 1;
@@ -94,34 +69,29 @@ public class AkinatorSimple {
                     return false;
                 }
             });
-//            List<WebElement> titles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(akinatorObj.answersText));
-//            int k = 1;
-//            for (WebElement elem : titles) {
-//                System.out.println(k + ". " + elem.getText());
-//                k++;
-//            }
-                /*
-                new FluentWait<>(driver)
-                        .pollingEvery(Duration.ofMillis(100))
-                        .withTimeout(Duration.ofSeconds(5))
-                        .ignoreAll(Arrays.asList(NoSuchElementException.class, WebDriverException.class))
-                        .until(d ->
-                                driver.findElements(By.xpath("//div[@class='database-selection selector dialog-box']//ul/li")).size() == 5
-                        );*/
-            //IntStream.rangeClosed(1, 5).forEach(answerNumber ->
-                    /*for (int j = 0; i < 5; i++) {
-                        new FluentWait<>(driver)
-                                .pollingEvery(Duration.ofMillis(200))
-                                .withTimeout(Duration.ofSeconds(2))
-                                .ignoring(NoSuchElementException.class, WebDriverException.class)
-                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)[" + j + "]")));
 
-                //  d -> {
-                //WebElement answer = driver.findElement(By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)[" + answerNumber + "]"));
-                //System.out.println("Answer #" + answerNumber + " :" + answer.getText());            //Здесь избыточная проверка??
-                //return true;
-                //})
-                    }*/
+//                new FluentWait<>(driver)
+//                        .pollingEvery(Duration.ofMillis(100))
+//                        .withTimeout(Duration.ofSeconds(5))
+//                        .ignoreAll(Arrays.asList(NoSuchElementException.class, WebDriverException.class))
+//                        .until(d ->
+//                                driver.findElements(By.xpath("//div[@class='database-selection selector dialog-box']//ul/li")).size() == 5
+//                        );
+
+//            IntStream.rangeClosed(1, 5).forEach(answerNumber ->
+//                    for (int j = 0; i < 5; i++) {
+//                        new FluentWait<>(driver)
+//                                .pollingEvery(Duration.ofMillis(200))
+//                                .withTimeout(Duration.ofSeconds(2))
+//                                .ignoring(NoSuchElementException.class, WebDriverException.class)
+//                                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)[" + j + "]")));
+//
+//                //  d -> {
+//                //WebElement answer = driver.findElement(By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)[" + answerNumber + "]"));
+//                //System.out.println("Answer #" + answerNumber + " :" + answer.getText());            //Здесь избыточная проверка??
+//                //return true;
+//                //})
+//                    }
             System.out.println();
             System.out.print("Please enter your answer: ");
             int userInputAnswer = scan.nextInt();
@@ -143,23 +113,16 @@ public class AkinatorSimple {
                 byte gameFinishUserAnswer = scan.nextByte();
                 if (gameFinishUserAnswer == 1) {
                     WebElement yesElement = driver.findElement(proposeYes);
-                    new FluentWait<>(driver)
-                            .pollingEvery(Duration.ofMillis(100))
-                            .withTimeout(Duration.ofSeconds(5))
-                            .until(ExpectedConditions.elementToBeClickable(yesElement));
+                    wait.until(ExpectedConditions.elementToBeClickable(yesElement));
                     yesElement.click();
                     break;
                 } else {
                     WebElement noElement = driver.findElement(proposeNo);
-                    new FluentWait<>(driver)
-                            .pollingEvery(Duration.ofMillis(100))
-                            .withTimeout(Duration.ofSeconds(5))
-                            .until(ExpectedConditions.elementToBeClickable(noElement));
+                    wait.until(ExpectedConditions.elementToBeClickable(noElement));
                     noElement.click();
                 }
             }
         }
-
         driver.quit();
     }
 }
