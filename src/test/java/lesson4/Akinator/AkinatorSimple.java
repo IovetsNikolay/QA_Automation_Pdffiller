@@ -18,14 +18,14 @@ import java.util.concurrent.TimeUnit;
 
 public class AkinatorSimple {
 
-    private By playButton = By.xpath("//a[@href='/game']/span");
-    private By questionText = By.xpath("//p[@class='question-text']");
-    private By questionNumberText = By.xpath("//p[@class='question-number']");
-    private By answersText = By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)");
-    private By proposeBuble = By.xpath("//div[@class='bubble-propose bubble']");
-    private By proposeTitle = By.xpath("//span[@class='proposal-title']");
-    private By proposeYes = By.xpath("//a[@id='a_propose_yes']");
-    private By proposeNo = By.xpath("//a[@id='a_propose_no']");
+    static private By playButton = By.xpath("//a[@href='/game']/span");
+    static private By questionText = By.xpath("//p[@class='question-text']");
+    static private By questionNumberText = By.xpath("//p[@class='question-number']");
+    static private By answersText = By.xpath("(//div[@class='database-selection selector dialog-box']//ul/li)");
+    static private By proposeBuble = By.xpath("//div[@class='bubble-propose bubble']");
+    static private By proposeTitle = By.xpath("//span[@class='proposal-title']");
+    static private By proposeYes = By.xpath("//a[@id='a_propose_yes']");
+    static private By proposeNo = By.xpath("//a[@id='a_propose_no']");
 
     public static void main(String[] args) {
 
@@ -37,19 +37,17 @@ public class AkinatorSimple {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.navigate().to("https://ru.akinator.com/");
 
-        AkinatorSimple akinatorObj = new AkinatorSimple();
         Scanner scan = new Scanner(System.in);
         System.out.println("Akinator Game, lets start");
         System.out.println();
-        WebDriverWait wait = new WebDriverWait(driver, 2);
-        wait
-        driver.findElement(akinatorObj.playButton).click();
+        WebDriverWait wait = new WebDriverWait(driver, 2, 100);
+        driver.findElement(playButton).click();
         for (int i = 1; true; i++) {
             String iStr = String.valueOf(i);
             new FluentWait<>(driver)                                            //Check question number
                     .pollingEvery(Duration.ofMillis(100))
                     .withTimeout(Duration.ofSeconds(5))
-                    .until(ExpectedConditions.textToBePresentInElementLocated(akinatorObj.questionNumberText, iStr));
+                    .until(ExpectedConditions.textToBePresentInElementLocated(questionNumberText, iStr));
             //wait.until(ExpectedConditions.textToBePresentInElementLocated(akinatorObj.questionNumberText, iStr));
 
 
@@ -77,17 +75,31 @@ public class AkinatorSimple {
             //  return(questionText);
             //}
             //});
-            String questionNumberValue = driver.findElement(akinatorObj.questionNumberText).getText();
-            String questionValue = driver.findElement(akinatorObj.questionText).getText();
+            String questionNumberValue = driver.findElement(questionNumberText).getText();
+            String questionValue = driver.findElement(questionText).getText();
             System.out.println(questionNumberValue + ". " + questionValue);
 
             System.out.println();
-            List<WebElement> titles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(akinatorObj.answersText));
-            int k = 1;
-            for (WebElement elem : titles) {
-                System.out.println(k + ". " + elem.getText());
-                k++;
-            }
+            //List<WebElement> titles;
+                    wait.until(d -> {
+                List<WebElement> answers = driver.findElements(answersText);
+                if (answers.size() == 5) {
+                    int k = 1;
+                    for (WebElement elem : answers) {
+                        System.out.println(k + ". " + elem.getText());
+                        k++;
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+//            List<WebElement> titles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(akinatorObj.answersText));
+//            int k = 1;
+//            for (WebElement elem : titles) {
+//                System.out.println(k + ". " + elem.getText());
+//                k++;
+//            }
                 /*
                 new FluentWait<>(driver)
                         .pollingEvery(Duration.ofMillis(100))
@@ -122,15 +134,15 @@ public class AkinatorSimple {
                     .withTimeout(Duration.ofSeconds(5))
                     .until(ExpectedConditions.elementToBeClickable(element));
             element.click();
-            if (driver.findElements(akinatorObj.proposeBuble).size() > 0) {
-                System.out.println("I think this: " + driver.findElement(akinatorObj.proposeTitle).getText());
+            if (driver.findElements(proposeBuble).size() > 0) {
+                System.out.println("I think this: " + driver.findElement(proposeTitle).getText());
                 System.out.println("Am I right?");
                 System.out.println("1. Yes");
                 System.out.println("2. No");
                 System.out.print("Enter your answer: ");
                 byte gameFinishUserAnswer = scan.nextByte();
                 if (gameFinishUserAnswer == 1) {
-                    WebElement yesElement = driver.findElement(akinatorObj.proposeYes);
+                    WebElement yesElement = driver.findElement(proposeYes);
                     new FluentWait<>(driver)
                             .pollingEvery(Duration.ofMillis(100))
                             .withTimeout(Duration.ofSeconds(5))
@@ -138,7 +150,7 @@ public class AkinatorSimple {
                     yesElement.click();
                     break;
                 } else {
-                    WebElement noElement = driver.findElement(akinatorObj.proposeNo);
+                    WebElement noElement = driver.findElement(proposeNo);
                     new FluentWait<>(driver)
                             .pollingEvery(Duration.ofMillis(100))
                             .withTimeout(Duration.ofSeconds(5))

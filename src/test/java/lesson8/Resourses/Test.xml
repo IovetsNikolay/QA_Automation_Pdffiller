@@ -1,0 +1,11 @@
+<suite name="MyAwsomeSuite" parallel="false">
+    <test name="MyFirstTest">
+        <classes>
+            <class name="lesson8.TestNGNewTest">
+                <methods>
+                    <include name="a"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
