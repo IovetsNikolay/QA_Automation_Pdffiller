@@ -1,4 +1,4 @@
-package lesson3.HomeWork.BankCurrency;
+package lesson3.HomeWork.BankCurrency.WithLocators;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
