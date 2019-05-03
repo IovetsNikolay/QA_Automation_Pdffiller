@@ -71,10 +71,10 @@ public class CodingBat {
     }
 
     public boolean endsLy (String str) {
-        if (str.substring(str.length()-2).equals("ly")) {
-            return true;
-        } else {
+        if (str.length() < 2 || !(str.substring(str.length()-2).equals("ly"))) {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -82,11 +82,11 @@ public class CodingBat {
         return (str.substring(0, n) + str.substring(str.length()-n));
     }
 
-    public String twoChar (String str, int n) {
-        if (n <= (str.length()-2)) {
-            return str.substring(n, n+2);
-        } else {
+    public String twoChar (String str, int index) {
+        if (index < 0 || !(index <= (str.length()-2))) {
             return str.substring(0, 2);
+        } else {
+            return str.substring(index, index+2);
         }
     }
 
@@ -178,7 +178,7 @@ public class CodingBat {
     }
 
     public String without2 (String str) {
-        if (str.length() <= 2 || !(str.substring(0, 2).equals(str.substring(str.length()-2)))) {
+        if (str.length() < 2 || !(str.substring(0, 2).equals(str.substring(str.length()-2)))) {
             return str;
         } else {
             return str.substring(2);
@@ -208,7 +208,7 @@ public class CodingBat {
     }
 
     public String startWord (String str, String word) {
-        if ((word.length() == 0) || !(str.substring(1).indexOf(word.substring(1)) == 0)) {
+        if ((word.length() == 0) || !(str.substring(1).indexOf(word.substring(1)) == 0) || str.length() == 0) {
             return "";
         } else if (word.length() == 1) {
             return str.substring(0, 1);
@@ -218,7 +218,9 @@ public class CodingBat {
     }
 
     public String withoutX (String str){
-        if (str.charAt(0) == 'x') {
+        if (str.length() == 0 || (str.length() == 1 && str.charAt(0) == 'x')) {
+            return "";
+        } if (str.charAt(0) == 'x') {
             str = str.substring(1);
         }
         if (str.charAt(str.length()-1) == 'x') {
@@ -228,7 +230,9 @@ public class CodingBat {
     }
 
     public String withoutX2 (String str) {
-        if (str.charAt(0) == 'x' || str.charAt(1) == 'x') {
+        if (str.length() == 0 || (str.length() == 1 && str.charAt(0) == 'x')) {
+            return "";
+        }else if (str.charAt(0) == 'x' || str.charAt(1) == 'x') {
             return (str.substring(0, 2).replace("x", "") + str.substring(2));
         } else {
             return str;
@@ -249,7 +253,7 @@ public class CodingBat {
 //        System.out.println(obj1.theEnd("Hello", false));
 //        System.out.println(obj1.withouEnd2("Hel"));
 //        System.out.println(obj1.middleTwo("aaammm"));
-//        System.out.println(obj1.endsLy("ly"));
+//        System.out.println(obj1.endsLy(""));
 //        System.out.println(obj1.nTwice("Hello", 2));
 //        System.out.println(obj1.twoChar("Hello", 3));
 //        System.out.println(obj1.middleThree("anda"));
@@ -262,10 +266,10 @@ public class CodingBat {
 //        System.out.println(obj1.frontAgain("hj"));
 //        System.out.println(obj1.minCat("ello", "Heloo"));
 //        System.out.println(obj1.extraFront(""));
-//        System.out.println(obj1.without2(""));
+        System.out.println(obj1.without2("Hi"));
 //        System.out.println(obj1.deFront("gbnju"));
 //        System.out.println(obj1.startWord("hippo", "iipp"));
 //        System.out.println(obj1.withoutX("xfsdsdfx"));
-        System.out.println(obj1.withoutX2("xxxix"));
+//        System.out.println(obj1.withoutX2("xxxix"));
     }
 }
