@@ -1,4 +1,4 @@
-package lesson8;
+package lesson8.ClassWork;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
