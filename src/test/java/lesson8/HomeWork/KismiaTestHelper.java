@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -17,18 +18,22 @@ public class KismiaTestHelper {
 
     public String url = "https://kismia.com/";                      //Site URL decalration
 
-    public By loginContainer = By.cssSelector("form.js_signInForm");      //locators declarating
-    //    public By emailInputXpath = By.xpath(".//input[@class='home-page-form__input js_emailField']");
-    //    public By passwordInputXpath = By.xpath(".//input[@class='home-page-form__input js_passwordField']");
-    //    public By submitButtonXpath = By.xpath(".//a[@class='home-page-form__submit js_submit']");
+    public By loginContainer = By.cssSelector("form.js_signInForm");                        //login page locators
     public By emailInputCss = By.cssSelector("input.js_emailField");
     public By passwordInputCss = By.cssSelector("input.js_passwordField");
     public By submitButtonCss = By.cssSelector("a.js_submit");
     public By validationErrorMessage = By.cssSelector("//p[@class='home-page-form__error js_validationErrorMsg']");
     public By serverErrorMessage = By.cssSelector("//p[@class='home-page-form__error js_serverErrorMsg']");
-    public By profileExpandIcon = By.cssSelector("i.icon--header-sub");
-    public By logoutExpandButton = By.xpath("//a[@onclick='App.auth.out();']");
 
+    public By profileExpandIcon = By.cssSelector("i.icon--header-sub");                     //main page locators
+    public By logoutExpandButton = By.xpath("//a[@onclick='App.auth.out();']");
+    public By profileExpandButton = By.xpath("//a[@href='/profile/settings']");
+
+    public By editProfileButton = By.cssSelector("a.js-edit-profile");                      //settings page locators
+    public By profileButton = By.xpath("//div[@data-tab='profile']/span");
+    public By saveSetingsBlock = By.xpath("//div[@class='settings-button-block settings-button-block--blue js_saveBlock']");
+    public By maleIcon = By.xpath("//input[@value='m'][@name='gender']/..");
+    public By femaleIcon = By.xpath("//input[@value='f'][@name='gender']/..");
 
     @BeforeClass
     public void init() {
@@ -43,6 +48,7 @@ public class KismiaTestHelper {
         driver.navigate().to(url);
         loginKismia("RISPIHALMA@DESOZ.COM", "feedwteks");
         Assert.assertEquals(driver.getCurrentUrl(), "https://kismia.com/matches#p=1");
+
     }
 
     @AfterClass
