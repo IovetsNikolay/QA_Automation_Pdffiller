@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -22,8 +23,8 @@ public class KismiaTestHelper {
     public By emailInputCss = By.cssSelector("input.js_emailField");
     public By passwordInputCss = By.cssSelector("input.js_passwordField");
     public By submitButtonCss = By.cssSelector("a.js_submit");
-    public By validationErrorMessage = By.cssSelector("//p[@class='home-page-form__error js_validationErrorMsg']");
-    public By serverErrorMessage = By.cssSelector("//p[@class='home-page-form__error js_serverErrorMsg']");
+    public By validationErrorMessage = By.xpath("//p[@class='home-page-form__error js_validationErrorMsg']");
+    public By serverErrorMessage = By.xpath("//p[@class='home-page-form__error js_serverErrorMsg']");
 
     public By profileExpandIcon = By.cssSelector("i.icon--header-sub");                     //main page locators
     public By logoutExpandButton = By.xpath("//a[@onclick='App.auth.out();']");
@@ -34,6 +35,11 @@ public class KismiaTestHelper {
     public By saveSetingsBlock = By.xpath("//div[@class='settings-button-block settings-button-block--blue js_saveBlock']");
     public By maleIcon = By.xpath("//input[@value='m'][@name='gender']/..");
     public By femaleIcon = By.xpath("//input[@value='f'][@name='gender']/..");
+    public By saveMaleButton = By.xpath("(//button[contains(@class, 'js_save')])[1]");
+    public By daySelectLocator = By.xpath("//select[@id='day']");
+    public By monthSelectLocator = By.xpath("//select[@id='month']");
+    public By yearSelectLocator = By.xpath("//select[@id='year']");
+
 
     @BeforeClass
     public void init() {
@@ -56,14 +62,14 @@ public class KismiaTestHelper {
         driver.quit();
     }
 
-    public boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException ex) {
-            return false;
-        }
-    }
+//    public boolean isElementPresent(By locator) {
+//        try {
+//            driver.findElement(locator);
+//            return true;
+//        } catch (NoSuchElementException ex) {
+//            return false;
+//        }
+//    }
 
     public void loginKismia (String login, String password) {
         WebElement loginSection = driver.findElement(loginContainer);
@@ -72,6 +78,24 @@ public class KismiaTestHelper {
         loginSection.findElement(passwordInputCss).clear();
         loginSection.findElement(passwordInputCss).sendKeys(password);
         loginSection.findElement(submitButtonCss).click();
+    }
+
+    public boolean getMaleValue(By locator) {
+        new WebDriverWait(driver, 5, 100)
+                .until(ExpectedConditions.elementToBeClickable(driver.findElement(locator)));
+        driver.findElement(locator).click();
+        if (driver.findElements(saveSetingsBlock).size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void pressSaveMaleButton (By locator) throws InterruptedException {
+        driver.findElement(locator).click();
+        new WebDriverWait(driver, 5, 100)
+                .until(ExpectedConditions.elementToBeClickable(driver.findElement(saveMaleButton)));
+        driver.findElement(saveMaleButton).click();
+        Thread.sleep(500);
     }
 
 }
