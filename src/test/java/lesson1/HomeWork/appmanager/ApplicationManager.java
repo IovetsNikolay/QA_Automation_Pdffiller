@@ -1,5 +1,7 @@
 package lesson1.HomeWork.appmanager;
 
+import lesson1.HomeWork.model.TestDataFields;
+import lesson1.HomeWork.model.UserDataFields;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,6 +27,8 @@ public class ApplicationManager {
         mainPage = new MainPageHelper(driver);                                      //Transfer created driver object in MainPageHelper class by constructor
         messagePage = new MessagePageHelper(driver);                                  //Transfer created driver object in MessagePageHelper class by constructor
         driver.navigate().to(url);
+        UserDataFields testUser = new UserDataFields("6572071413", "s1gngr0w");
+        getLoginPage().pageLogin(testUser);
     }
 
     public void stop() {
