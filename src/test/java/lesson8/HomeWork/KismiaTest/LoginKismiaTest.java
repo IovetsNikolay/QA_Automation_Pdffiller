@@ -1,4 +1,4 @@
-package lesson8.HomeWork;
+package lesson8.HomeWork.KismiaTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

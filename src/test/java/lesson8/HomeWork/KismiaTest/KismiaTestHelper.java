@@ -1,16 +1,18 @@
-package lesson8.HomeWork;
+package lesson8.HomeWork.KismiaTest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class KismiaTestHelper {
@@ -29,14 +31,22 @@ public class KismiaTestHelper {
     public By profileExpandIcon = By.cssSelector("i.icon--header-sub");                     //main page locators
     public By logoutExpandButton = By.xpath("//a[@onclick='App.auth.out();']");
     public By profileExpandButton = By.xpath("//a[@href='/profile/settings']");
+    public By messagesButton = By.cssSelector("a.new-header-main-nav__link--messages");
+
+    public By contactsListTopMessage = By.xpath("//ul[@id='standard-threads-container']/*[1]");     //message page locators
+    public By mesageTextArea = By.xpath("//textarea[@name='message']");
+    public By sendMesageButton = By.xpath("//button [@type='button']");
+    public By sendedMesage = By.xpath("//p[@class='chat__message chat__message--from']");
+
+
 
     public By editProfileButton = By.cssSelector("a.js-edit-profile");                      //settings page locators
     public By profileButton = By.xpath("//div[@data-tab='profile']/span");
     public By saveSetingsBlock = By.xpath("//div[@class='settings-button-block settings-button-block--blue js_saveBlock']");
     public By maleIcon = By.xpath("//input[@value='m'][@name='gender']/..");
     public By femaleIcon = By.xpath("//input[@value='f'][@name='gender']/..");
-    public By saveMaleButton = By.xpath("(//button[contains(@class, 'js_save')])[1]");
-    public By daySelectLocator = By.xpath("//select[@id='day']");
+    public By saveSatingsButton = By.xpath("(//button[contains(@class, 'js_save')])[1]");
+    public By daySelectLocator = By.xpath("//select[@name='day']");
     public By monthSelectLocator = By.xpath("//select[@id='month']");
     public By yearSelectLocator = By.xpath("//select[@id='year']");
 
@@ -93,9 +103,19 @@ public class KismiaTestHelper {
     public void pressSaveMaleButton (By locator) throws InterruptedException {
         driver.findElement(locator).click();
         new WebDriverWait(driver, 5, 100)
-                .until(ExpectedConditions.elementToBeClickable(driver.findElement(saveMaleButton)));
-        driver.findElement(saveMaleButton).click();
+                .until(ExpectedConditions.elementToBeClickable(driver.findElement(saveSatingsButton)));
+        driver.findElement(saveSatingsButton).click();
         Thread.sleep(500);
     }
-
+    public void chooseDropDowns(By locator, String index) {
+        new Select(driver.findElement(locator)).selectByVisibleText(index);
+    }
+    public List<String> getAllOptions(By by) {                                              //Получение элементов из выпадающего списка!!
+        List<String> options = new ArrayList<String>();
+        for (WebElement option : new Select(driver.findElement(by)).getOptions()) {
+            String txt = option.getText();
+            if (option.getAttribute("value") != "") options.add(option.getText());
+        }
+        return options;
+    }
 }

@@ -3,7 +3,7 @@
 <suite name="Default Suite">
   <test name="QA_Automation">
     <classes>
-      <class name="lesson8.HomeWork.LoginKismiaTest"/>
+      <class name="lesson8.HomeWork.KismiaTest.LoginKismiaTest"/>
     </classes>
   </test> <!-- QA_Automation -->
 </suite> <!-- Default Suite -->
