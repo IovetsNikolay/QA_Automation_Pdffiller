@@ -2,6 +2,7 @@ package lesson8.HomeWork.KismiaTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,12 +19,8 @@ public class MessageKismiaTest extends KismiaTestHelper {
         driver.findElement(mesageTextArea).clear();
         driver.findElement(mesageTextArea).sendKeys("TestMessage");
         driver.findElement(sendMesageButton).click();
-//        new WebDriverWait(driver, 3, 100)
-//                .until(d-> if (driver.findElements(sendedMesage) == sizeBefore+1) {
-//            return true;
-//        } else {
-//            return false;
-//        })
+        new WebDriverWait(driver, 3, 100)
+                .until(d -> driver.findElements(sendedMesage).size() == sizeBefore + 1);
         if (driver.findElements(By.cssSelector("div.dialog-form")).size() > 0) {
             driver.findElement(By.cssSelector("span.close")).click();
         }
