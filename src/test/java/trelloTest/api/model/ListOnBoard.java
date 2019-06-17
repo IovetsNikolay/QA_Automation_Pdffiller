@@ -1,6 +1,6 @@
 package trelloTest.api.model;
 
-public class TrelloList {
+public class ListOnBoard {
 
     public String id;
     public String name;

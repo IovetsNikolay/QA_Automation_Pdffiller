@@ -4,14 +4,14 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 import trelloTest.api.model.Board;
-import trelloTest.api.model.TrelloList;
+import trelloTest.api.model.ListOnBoard;
 
 import java.util.List;
 
 public interface BoardsService {
 
     @GET("boards/{id}/lists")
-    Call<List<TrelloList>> getLists(@Path("id")String id);
+    Call<List<ListOnBoard>> getLists(@Path("id")String id);
 
     @POST("boards")
     Call<Board> createBoard(@Query("name") String name);

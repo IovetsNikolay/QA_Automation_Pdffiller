@@ -75,11 +75,11 @@
 //    @Step
 //    public boolean isPaginationTextCorrectFewPages(int documentInFolderQuantity) {
 //        if (documentInFolderQuantity < 21) {
-//            List<WebElement> documentsList = driver.findElements(documentContainer);
+//            Cards<WebElement> documentsList = driver.findElements(documentContainer);
 //            return driver.findElement(paginationCounter).getText()
 //                    .equals("1 — " + documentsList.size() + " of " + documentsList.size());                                                 //Check right displaying of the pagination text when there are less that 21 documents in folder
 //        } else {
-//            List<WebElement> paginationBtnContainers = driver.findElements(btnPaginationPageElements);                                      //List of the pagination buttons
+//            Cards<WebElement> paginationBtnContainers = driver.findElements(btnPaginationPageElements);                                      //Cards of the pagination buttons
 //            int lastPaginationPageNumber = Integer.parseInt(paginationBtnContainers.get(paginationBtnContainers.size() - 2).getText());     //define of the last page number
 //            boolean isCurrentPageLast = defineActivePaginationPage() == lastPaginationPageNumber;                                           //define is page last
 //            int paginationPageCounter = ((defineActivePaginationPage() - 1) * 20) + 1;                                                      //according to last page or not define page counter

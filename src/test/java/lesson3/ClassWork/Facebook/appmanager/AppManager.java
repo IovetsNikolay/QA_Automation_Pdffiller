@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AppManager {
     private String url = "https://www.facebook.com";
-    private By firstNameInput = By.xpath("//input[@name='firstname']");                      //List of the locators
+    private By firstNameInput = By.xpath("//input[@name='firstname']");                      //Cards of the locators
     private By lastNameInput = By.xpath("//input[@name='lastname']");
     private By phoneNumberInput = By.xpath("//input[@name='reg_email__']");
     private By passwodInput = By.xpath("//input[@name='reg_passwd__']");

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MessagePageHelper extends MainHelper{
-    private By messengerSelect = By.xpath("//ul[@aria-label='Conversation List']/*[1]");
+    private By messengerSelect = By.xpath("//ul[@aria-label='Conversation Cards']/*[1]");
     private By MassageContent = By.xpath("//div[@class='__i_']//div[@id='js_1']/*[last()]/*[1]/*[last()]/div/div/div/span");
 
     public MessagePageHelper(WebDriver driver) {
