@@ -16,7 +16,7 @@ public class AppManager {
 
         protected String url = "http://liniakino.com/showtimes/aladdin/";
 
-        protected By filmName1 = By.xpath("//li//h1/a");                                      //Cards of the locators
+        protected By filmName1 = By.xpath("//li//h1/a");                                      //Card of the locators
 
         public void init() {
             System.setProperty("webdriver.chrome.driver", "C:/webDrivers/chromedriver.exe");

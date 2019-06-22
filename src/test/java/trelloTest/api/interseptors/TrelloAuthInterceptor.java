@@ -9,9 +9,8 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class TrelloAuthInterceptor implements Interceptor{
-    private static final String KEY = "8f0347d54812e3cb5acac34fd76fc70d";
-    private static final String TOKEN = "c3adec871babcea8f22d8a0de807eb7e7ced6d15122850a4e7efee197f77150f";
-    //сюда нужно передать свой!!!
+    private static final String KEY = "854673677fcfa7ebe096e48ba019982a";
+    private static final String TOKEN = "eb0a688d69badfd17c66087857003fe4ff63667bdbcd012d4dd1d8bcdb124854";
 
     @Override
     public Response intercept(Interceptor.Chain chain) throws IOException {

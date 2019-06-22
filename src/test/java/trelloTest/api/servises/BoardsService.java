@@ -9,9 +9,8 @@ import trelloTest.api.model.ListOnBoard;
 import java.util.List;
 
 public interface BoardsService {
-
-    @GET("boards/{id}/lists")
-    Call<List<ListOnBoard>> getLists(@Path("id")String id);
+    @GET("members/{id}/boards")
+    Call<List<Board>> getMembersBoards(@Path("id")String id);
 
     @POST("boards")
     Call<Board> createBoard(@Query("name") String name);

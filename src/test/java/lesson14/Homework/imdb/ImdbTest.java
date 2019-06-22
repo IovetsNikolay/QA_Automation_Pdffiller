@@ -65,13 +65,13 @@ public class ImdbTest {
         List<DirectorObject> directorObjectList = makeDirectorObject(filmObjectList);
         directorObjectList.sort(Comparator.comparing(o -> o.filmValue));
         System.out.println();
-        System.out.println("Cards of the directors with films quantity");
+        System.out.println("Card of the directors with films quantity");
         System.out.println();
             for (DirectorObject d : directorObjectList) {
                 System.out.println(d.director +  "  " + d.filmValue);
             }
         System.out.println();
-        System.out.println("Cards of the directors with avarange rating");
+        System.out.println("Card of the directors with avarange rating");
         System.out.println();
             directorObjectList.sort(Comparator.comparing(o->o.avarangeValue));
             for (DirectorObject d : directorObjectList) {
@@ -80,13 +80,13 @@ public class ImdbTest {
         List<ActorsObject> actorsObjectList = makeActorObject(filmObjectList);
             actorsObjectList.sort(Comparator.comparing(o->o.filmValue));
         System.out.println();
-        System.out.println("Cards of the actors with films quantity");
+        System.out.println("Card of the actors with films quantity");
         System.out.println();
         for (ActorsObject d : actorsObjectList) {
             System.out.println(d.actor +  "  " + d.filmValue);
         }
         System.out.println();
-        System.out.println("Cards of the directors with avarange rating");
+        System.out.println("Card of the directors with avarange rating");
         System.out.println();
         actorsObjectList.sort(Comparator.comparing(o->o.avarangeValue));
         for (ActorsObject d : actorsObjectList) {

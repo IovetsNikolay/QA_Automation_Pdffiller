@@ -14,7 +14,7 @@ public class ApplicationManager {
 
     protected String url = "https://www.imdb.com/chart/top";
 
-    protected By filmName = By.xpath("//td[@class='titleColumn']/a");                  //Cards of the locators
+    protected By filmName = By.xpath("//td[@class='titleColumn']/a");                  //Card of the locators
     protected By filmRating = By.xpath("//td[@class='ratingColumn imdbRating']/strong");
     //protected By filmLink = By.xpath("//tbody[@class='lister-list']/tr//strong");
 

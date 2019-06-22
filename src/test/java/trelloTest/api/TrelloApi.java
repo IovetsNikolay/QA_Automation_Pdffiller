@@ -6,8 +6,9 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import trelloTest.api.model.Cards;
+import trelloTest.api.model.Card;
 import trelloTest.api.model.CheckList;
+import trelloTest.api.model.ChecklistItem;
 import trelloTest.api.model.ListOnBoard;
 
 import java.io.IOException;
@@ -33,17 +34,19 @@ public class TrelloApi {
         Type type = new TypeToken<List<ListOnBoard>>(){}.getType();
         List<ListOnBoard> listOnBoard1s = gson.fromJson(response, type);
         System.out.println(response);
+        System.out.println("--getFieldsOnBoardsList--");
         return listOnBoard1s;
     }
 
-    public List<Cards> getCardList(String listId) throws IOException {           ///lists/{id}/cards
+    public List<Card> getCardList(String listId) throws IOException {           ///lists/{id}/cards
         Request request = new Request.Builder()
                 .url("https://api.trello.com/1/lists/" + listId + "/cards?key=" + KEY + "&token="+ TOKEN)
                 .build();
         String response = client.newCall(request).execute().body().string();
-        Type type = new TypeToken<List<Cards>>(){}.getType();
-        List<Cards> cards = gson.fromJson(response, type);
+        Type type = new TypeToken<List<Card>>(){}.getType();
+        List<Card> cards = gson.fromJson(response, type);
         System.out.println(response);
+        System.out.println("--getCardList--");
         return cards;
     }
 
@@ -55,10 +58,11 @@ public class TrelloApi {
         Type type = new TypeToken<List<CheckList>>(){}.getType();
         List<CheckList> checklistList = gson.fromJson(response, type);
         System.out.println(response);
+        System.out.println("--getCheckListsList--");
         return checklistList;
     }
 
-    public void createList (String boardId, Cards list) throws IOException {          ///lists
+    public void createList (String boardId, Card list) throws IOException {          ///lists
         String json = gson.toJson(list);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
@@ -67,9 +71,10 @@ public class TrelloApi {
                 .build();
         String response = client.newCall(request).execute().body().string();
         System.out.println(response);
+        System.out.println("--getList--");
     }
 
-    public void createCard(String listId, Cards card) throws IOException {
+    public void createCard(String listId, Card card) throws IOException {
         String json = gson.toJson(card);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
@@ -78,6 +83,7 @@ public class TrelloApi {
                 .build();
         String response = client.newCall(request).execute().body().string();
         System.out.println(response);
+        System.out.println("--createCard--");
     }
 
     public void createChecklist (String cardId, CheckList checkList) throws IOException {
@@ -89,5 +95,42 @@ public class TrelloApi {
                 .build();
         String response = client.newCall(request).execute().body().string();
         System.out.println(response);
+        System.out.println("--createChecklist--");
     }
+
+    public void createChecklistItem (String cardId, ChecklistItem checkListItem) throws IOException {
+        String json = gson.toJson(checkListItem);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        Request request = new Request.Builder()
+                .url("https://api.trello.com/1/checklists/" + cardId + "/checkItems?name=" + checkListItem + "&pos=bottom&checked=false&key=" + KEY + "&token=" + TOKEN)
+                .post(body)
+                .build();
+        String response = client.newCall(request).execute().body().string();
+        System.out.println(response);
+        System.out.println("--createChecklistItem--");
+    }
+
+    public void archiveList(ListOnBoard listOnBoardList) throws IOException {
+        String json = gson.toJson(listOnBoardList);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        Request request = new Request.Builder()
+                .url("https://api.trello.com/1/lists/" +listOnBoardList.id + "/closed?value=true&key=" + KEY + "&token=" + TOKEN)
+                .put(body)
+                .build();
+        String response = client.newCall(request).execute().body().string();
+        System.out.println(response);
+        System.out.println("--archiveList--");
+    }
+
+    public void deleteCard (String cardId) throws IOException {
+        Request request = new Request.Builder()
+                .url("https://api.trello.com/1/cards/" + cardId + "?key=" + KEY + "&token=" + TOKEN)
+                .delete()
+                .build();
+        String response = client.newCall(request).execute().body().string();
+        System.out.println(response);
+        System.out.println("--deleteCard--");
+    }
+
+
 }

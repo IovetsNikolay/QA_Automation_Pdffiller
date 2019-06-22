@@ -5,7 +5,7 @@
 //import org.testng.annotations.Test;
 //import org.testng.asserts.SoftAssert;
 //
-//import java.util.Cards;
+//import java.util.Card;
 //    package tests.sign_now.documents;
 //
 //import com.products.thirdparty.testrail.TestCase;
@@ -31,7 +31,7 @@
 //import ru.yandex.qatools.allure.annotations.Features;
 //import utils.SignNowRequestMan;
 //
-//import java.util.Cards;
+//import java.util.Card;
 //
 //import static data.TestData.FilesToUpload.editorFile;
 //
@@ -72,7 +72,7 @@
 //        @Test
 //        public void unarchiveTest() throws InterruptedException {
 //
-//            Cards<String> documentsInFolderAfterUnArchive = documentsPage
+//            Card<String> documentsInFolderAfterUnArchive = documentsPage
 //                    .openArchive()
 //                    .clickMore(1)
 //                    .unArchive()

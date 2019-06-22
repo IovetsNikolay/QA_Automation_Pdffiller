@@ -1,10 +1,8 @@
 package trelloTest.api;
 
-import org.testng.annotations.BeforeSuite;
+import lesson14.Homework.Solution;
 import org.testng.annotations.Test;
-import trelloTest.api.model.Cards;
-import trelloTest.api.model.CheckList;
-import trelloTest.api.model.ListOnBoard;
+import trelloTest.api.model.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,13 +11,12 @@ public class TrelloApiTest {
 
     private TrelloApi trelloApi;
     private List<ListOnBoard> listOnBoardList;
-    private List<Cards> cardList;
+    private List<Card> cardList;
     private List<CheckList> checklistsList;
 
-    private static final String BOARD_ID_SHORT = "tBlWs9fq";
     private static final String BOARD_ID = "5ce422edf8b1357014edf236";
 
-    @BeforeSuite
+//    @BeforeMethod
     public void getBoardsListTest() throws IOException {
         trelloApi = new TrelloApi();
         listOnBoardList = trelloApi.getFieldsOnBoardsList(BOARD_ID);
@@ -27,44 +24,45 @@ public class TrelloApiTest {
         checklistsList = trelloApi.getCheckListsList(cardList.get(0).id);
     }
 
-    @Test
+//    @Test
     public void createListTest() throws IOException {
-        Cards list = new Cards();
+        Card list = new Card();
         list.name = "New List";
         trelloApi.createList(BOARD_ID, list);
+        listOnBoardList = trelloApi.getFieldsOnBoardsList(BOARD_ID);
+        trelloApi.archiveList(listOnBoardList.get(0));
     }
 
-    @Test
+//    @Test (dependsOnMethods = "createListTest")
     public void createCardTest() throws IOException {
+//        listOnBoardList = trelloApi.getFieldsOnBoardsList(BOARD_ID);
         ListOnBoard list = listOnBoardList.get(0);
-        Cards card = new Cards();
-        card.name = "CardTemp: " + list.name;
+        Card card = new Card();
+        card.name = "CardTemp1: " + list.name;
         card.desc = "New Awersome CardTemp";
         trelloApi.createCard(list.id, card);
+        cardList = trelloApi.getCardList(listOnBoardList.get(0).id);
+        trelloApi.deleteCard(cardList.get(0).id);
     }
 
-    @Test
-    public void CreateChecklistTest() throws IOException {
-        Cards card = cardList.get(0);
+//    @Test (dependsOnMethods = "createCardTest")
+    public void addChecklistTest() throws IOException {
+        Card card = cardList.get(0);
         CheckList checkList = new CheckList();
         checkList.name = "New checklist";
         trelloApi.createChecklist(card.id, checkList);
     }
 
-    TrelloRestClient client = new TrelloRestClient();
+//    @Test(dependsOnMethods = "addChecklistTest")
+    public void addCheckItem() throws IOException {
+        CheckList checkList = checklistsList.get(0);
+        ChecklistItem checkListItem = new ChecklistItem();
+        checkListItem.name = "New ChecklistItem";
+        trelloApi.createChecklistItem(checkList.id, checkListItem);
+    }
 
 //    @Test
-//    public void adasda() throws IOException {
-//        List<ListOnBoard> body = client.boardsService.getLists("0L69AHpE").execute().body();
-//        body.forEach(t -> System.out.println(t.name));
-//    }
-//
-//    @Test
-//    public void createBoard() throws IOException, InterruptedException {
-//        Board board = client.boardsService.createBoard("Lolik 25").execute().body();
-//        board.desc = "ASDASDDSADASSDASDASASDDASDAS";
-//        client.boardsService.updateBoard(board.id, board).execute();
-//
-//    }
+    public void updateCard() {
+    }
 }
 

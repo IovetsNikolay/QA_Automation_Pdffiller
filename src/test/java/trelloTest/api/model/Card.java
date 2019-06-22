@@ -2,13 +2,13 @@ package trelloTest.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Cards {
+public class Card {
 
-    public Cards(String name, String id) {
+    public Card(String name, String id) {
         this.name = name;
         this.id = id;
     }
-    public Cards() {}
+    public Card() {}
 
     //    @SerializedName("1-DESC_#(%%%")
     public String name;
@@ -17,7 +17,7 @@ public class Cards {
 
     @Override
     public String toString() {
-        return "Cards{" +
+        return "Card{" +
                 "name='" + name + '\'' +
                 ", id='" + id + '\'' +
                 '}';
