@@ -10,15 +10,15 @@ import java.util.List;
 
 public interface CardService {
 
-    @GET("cards/{id}/list")
+    @GET("lists/{id}/cards")
     Call<List<Card>> getCards(@Path("id")String id);
 
     @POST("cards")
     Call<Card> createCard(@Query("name") String name, @Query("idList") String idList);
 
     @PUT("cards/{id}")
-    Call<Card> UpdateCard(@Path("id")String id, @Body Card card);
+    Call<Card> updateCard(@Path("id")String id, @Body Card card);
 
-    @DELETE("/cards/{id}")
+    @DELETE("cards/{id}")
     Call<ResponseBody> deleteCard(@Path("id")String id);
 }

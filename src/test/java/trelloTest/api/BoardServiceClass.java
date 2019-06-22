@@ -20,19 +20,19 @@ public class BoardServiceClass {
         boardList.forEach(e -> System.out.println(e));
     }
 
-//    @Test
+    @Test
     public void createBoard() throws IOException {
         board = client.boardsService.createBoard("Vasia Pupkin1").execute().body();
         System.out.println(board);
     }
 
-//    @Test(dependsOnMethods = "createBoard")
+    @Test(dependsOnMethods = "createBoard")
     public void updateBoard() throws IOException {
         board.desc = "ASDASDDSADASSDASDASASDDASDAS";
         client.boardsService.updateBoard(board.id, board).execute();
     }
 
-//    @Test(dependsOnMethods = "getBoardList")
+    @Test(dependsOnMethods = "getBoardList")
     public void deleteBoard() throws IOException {
         client.boardsService.deleteBoard(boardList.get(0).id).execute();
     }

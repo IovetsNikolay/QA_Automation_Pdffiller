@@ -5,6 +5,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import trelloTest.api.interseptors.TrelloAuthInterceptor;
 import trelloTest.api.servises.BoardsService;
+import trelloTest.api.servises.CardService;
+import trelloTest.api.servises.LabelsService;
 import trelloTest.api.servises.ListsService;
 
 
@@ -28,6 +30,7 @@ public class TrelloRestClient {
             .build();
 
     public BoardsService boardsService = retrofit.create(BoardsService.class);
-    public ListsService  listsService = retrofit.create(ListsService .class);
-
+    public ListsService listsService = retrofit.create(ListsService .class);
+    public CardService cardService = retrofit.create(CardService.class);
+    public LabelsService labelsService = retrofit.create(LabelsService.class);
 }

@@ -1,21 +1,17 @@
 package trelloTest.api.model;
 
-import java.util.ArrayList;
-import java.util.List;
+public class CardLabel {
 
-public class Card {
-
-    //    @SerializedName("1-DESC_#(%%%")
     public String name;
     public String id;
-    public String desc;
-    public List<CardLabel> labels = new ArrayList<>();
+    public String color;
 
     @Override
     public String toString() {
-        return "Card{" +
+        return "CardLabel{" +
                 "name='" + name + '\'' +
                 ", id='" + id + '\'' +
+                ", color='" + color + '\'' +
                 '}';
     }
 }
